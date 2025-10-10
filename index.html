@@ -7,7 +7,104 @@
   <meta name="description" content="Convoyage automobile professionnel en France et en Europe. Devis rapide, service fiable et discret." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+  :root{
+    --bg:#0e1418; --bg-alt:#111a20; --card:#0f1820;
+    --text:#e8f0f5; --muted:#9bb0bd;
+    --accent:#19c3d8; --accent-2:#0fb3c8;
+    --ring: rgba(25,195,216,.35); --shadow: 0 10px 25px rgba(0,0,0,.35);
+  }
+  *{ box-sizing:border-box }
+  html,body{ margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; color:var(--text); background:var(--bg) }
+  img{ max-width:100%; display:block }
+  .container{ width:min(1120px, 92%); margin-inline:auto }
+
+  /* Header / Nav */
+  .header{ position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
+    background:linear-gradient(to bottom, rgba(10,14,18,.8), rgba(10,14,18,.35)); border-bottom:1px solid rgba(255,255,255,.06); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.9rem 0 }
+  .brand{ font-weight:800; letter-spacing:.3px; color:var(--text); text-decoration:none; font-size:1.15rem }
+  .brand span{ color:var(--accent) }
+  .menu{ display:flex; align-items:center; gap:1rem }
+  .menu a{ color:var(--text); text-decoration:none; padding:.55rem .9rem; border-radius:999px; opacity:.9 }
+  .menu a:hover{ opacity:1; background:rgba(255,255,255,.04) }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; padding:.85rem 1.1rem; border-radius:.9rem; font-weight:700; text-decoration:none; transition:.2s ease; border:1px solid transparent }
+  .btn-primary{ background:var(--accent); color:#042028; box-shadow:0 8px 20px var(--ring) }
+  .btn-primary:hover{ transform:translateY(-1px); background:var(--accent-2) }
+  .btn-outline{ border-color:rgba(255,255,255,.14) }
+  .btn-outline:hover{ border-color:transparent; background:rgba(255,255,255,.08) }
+  .burger{ display:none; background:none; border:0; padding:.25rem; cursor:pointer }
+  .burger span{ display:block; width:24px; height:2px; background:#cfe7ef; margin:5px 0; transition:.2s }
+
+  /* Hero */
+  .hero{ position:relative; min-height:72vh; display:grid; place-items:center; text-align:center }
+  .hero__backdrop{ position:absolute; inset:0;
+    background:
+      radial-gradient(1200px 600px at 50% 10%, rgba(25,195,216,.25), transparent 60%),
+      linear-gradient(to bottom, rgba(3,8,12,.55), rgba(3,8,12,.92)),
+      url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1960&auto=format&fit=crop') center/cover no-repeat;
+    filter:saturate(95%); }
+  .hero__content{ position:relative; z-index:1; padding:5rem 0 }
+  .hero h1{ font-size:clamp(2rem, 4vw + 1.4rem, 4rem); margin:0 0 1rem; line-height:1.05 }
+  .hero .accent{ color:var(--accent) }
+  .subtitle{ color:var(--muted); font-size:clamp(.95rem, 1vw + .6rem, 1.2rem); margin-bottom:1.6rem }
+
+  /* Sections */
+  .section{ padding:4.5rem 0 }
+  .section-alt{ background:var(--bg-alt) }
+  .section-title{ font-size:clamp(1.6rem, 1.6vw + 1rem, 2.2rem); margin:0 0 .4rem }
+  .section-subtitle{ color:var(--muted); margin:0 0 2rem }
+
+  /* Services */
+  .cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem }
+  .card{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; overflow:hidden; box-shadow:var(--shadow) }
+  .card__media{ height:190px; background:#0a1116 }
+  .placeholder{ background:linear-gradient(145deg,#0d1620,#0a1218) }
+  .card__body{ padding:1.1rem 1.2rem 1.4rem }
+  .card h3{ margin:.2rem 0 .3rem; font-size:1.25rem }
+  .card p{ color:var(--muted); margin:0 0 .9rem }
+  .pill{ display:inline-block; background:rgba(25,195,216,.12); color:var(--accent); border:1px solid var(--ring); padding:.55rem .75rem; border-radius:.7rem; font-weight:700 }
+
+  /* Features */
+  .features{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem }
+  .feature{ background:var(--card); border:1px solid rgba(255,255,255,.06); padding:1.2rem; border-radius:16px; text-align:center; box-shadow:var(--shadow) }
+  .feature .icon{ width:52px; height:52px; margin:0 auto .6rem; display:grid; place-items:center; background:rgba(25,195,216,.12); border-radius:14px; border:1px solid var(--ring) }
+  .feature svg{ width:26px; fill:var(--accent) }
+  .feature h4{ margin:.4rem 0 .25rem }
+  .feature p{ color:var(--muted); margin:0 }
+
+  /* Contact */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.25rem }
+  .contact-card{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:1.25rem; box-shadow:var(--shadow) }
+  .contact-item{ display:flex; gap:.8rem; align-items:flex-start; padding:.6rem 0; border-bottom:1px solid rgba(255,255,255,.06) }
+  .contact-item:last-child{ border-bottom:0 }
+  .contact-icon{ width:36px; height:36px; display:grid; place-items:center; background:rgba(25,195,216,.12); border:1px solid var(--ring); border-radius:10px }
+  .label{ color:var(--muted); font-size:.9rem }
+  .form{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:1.25rem; box-shadow:var(--shadow) }
+  .field{ display:flex; flex-direction:column; gap:.35rem; margin-bottom:.8rem }
+  input, textarea{ width:100%; background:#0b1217; border:1px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; padding:.8rem .9rem; outline:none }
+  input:focus, textarea:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(--ring) }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:.8rem }
+  .form-status{ margin-top:.65rem; color:var(--muted) }
+
+  /* Footer */
+  .footer{ border-top:1px solid rgba(255,255,255,.08); background:#0a1014; padding:1.2rem 0; margin-top:2rem }
+  .footer__inner{ display:flex; align-items:center; justify-content:space-between }
+  .backtop{ color:var(--muted); text-decoration:none }
+  .backtop:hover{ color:var(--text) }
+
+  /* Responsive */
+  @media (max-width: 900px){
+    .cards{ grid-template-columns:1fr }
+    .features{ grid-template-columns:1fr 1fr }
+    .contact-grid{ grid-template-columns:1fr }
+    .two-col{ grid-template-columns:1fr }
+    .burger{ display:inline-block }
+    .menu{ position:absolute; top:62px; right:16px; left:16px; flex-direction:column; background:#0a1116; border:1px solid rgba(255,255,255,.08); padding:.6rem; border-radius:12px; display:none }
+    .menu.open{ display:flex }
+  }
+  </style>
 </head>
 <body>
   <!-- Header / Navbar -->
@@ -33,9 +130,7 @@
     <div class="hero__backdrop"></div>
     <div class="container hero__content">
       <h1>Convoyage Automobile <span class="accent">Professionnel</span></h1>
-      <p class="subtitle">
-        Votre partenaire de confiance pour le transport sécurisé de vos véhicules en France et en Europe.
-      </p>
+      <p class="subtitle">Votre partenaire de confiance pour le transport sécurisé de vos véhicules en France et en Europe.</p>
       <a href="#contact" class="btn btn-primary">Devis gratuit</a>
     </div>
   </section>
@@ -47,33 +142,20 @@
       <p class="section-subtitle">Des solutions adaptées à vos besoins</p>
 
       <div class="cards">
-        <!-- Carte 1 -->
         <article class="card">
-          <!-- L'image sera ajoutée plus tard : bloc réservé -->
-          <div class="card__media placeholder">
-            <!-- vide pour le moment -->
-          </div>
+          <div class="card__media placeholder"></div>
           <div class="card__body">
             <h3>Convoyage France</h3>
-            <p>
-              Service de convoyage professionnel sur tout le territoire français.
-              Prise en charge complète, suivi et remise en main propre.
-            </p>
+            <p>Service de convoyage professionnel sur tout le territoire français. Prise en charge complète, suivi et remise en main propre.</p>
             <div class="pill">350€ / jour + frais réels facturés</div>
           </div>
         </article>
 
-        <!-- Carte 2 -->
         <article class="card">
-          <div class="card__media placeholder">
-            <!-- vide pour le moment -->
-          </div>
+          <div class="card__media placeholder"></div>
           <div class="card__body">
             <h3>Convoyage International</h3>
-            <p>
-              Transport de véhicules à travers l’Europe. Gestion des formalités,
-              discrétion et sécurité assurées.
-            </p>
+            <p>Transport de véhicules à travers l’Europe. Gestion des formalités, discrétion et sécurité assurées.</p>
             <div class="pill">500€ / jour + frais réels facturés</div>
           </div>
         </article>
@@ -90,7 +172,6 @@
       <div class="features">
         <div class="feature">
           <div class="icon">
-            <!-- Shield icon -->
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3v6c0 5.55-3.84 10.74-7 12-3.16-1.26-7-6.45-7-12V5l7-3zm0 4.18L7 7.35v3.65c0 4.13 2.8 8.33 5 9.72 2.2-1.39 5-5.59 5-9.72V7.35l-5-1.17zm0 2.82a3 3 0 110 6 3 3 0 010-6z"/></svg>
           </div>
           <h4>Fiabilité</h4>
@@ -99,7 +180,6 @@
 
         <div class="feature">
           <div class="icon">
-            <!-- Eye-off icon -->
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c.73 1.88 1.95 3.54 3.46 4.85l-1.9 1.9 1.41 1.41 18-18-1.41-1.41-3.43 3.43C15.29 4.92 13.67 4.5 12 4.5zm0 3c1.03 0 2 .26 2.85.71l-1.53 1.53A3.5 3.5 0 008.26 12L6.7 13.56A5.5 5.5 0 0112 7.5zm0 9a5.48 5.48 0 01-3.27-1.08l-1.53 1.53A7.5 7.5 0 0012 16.5c5 0 9.27-3.11 11-7.5-.53-1.36-1.32-2.6-2.32-3.67l-2.06 2.06c.26.68.38 1.41.38 2.11a5.5 5.5 0 01-5.5 5.5z"/></svg>
           </div>
           <h4>Discrétion</h4>
@@ -108,7 +188,6 @@
 
         <div class="feature">
           <div class="icon">
-            <!-- Shield-check -->
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l8 3v6c0 6-4.17 11.6-8 13-3.83-1.4-8-7-8-13v-6l8-3zm-1 12.59l-2.29-2.3-1.42 1.42L11 16.91l5.71-5.71-1.42-1.42L11 14.09z"/></svg>
           </div>
           <h4>Assurance & RC Pro</h4>
@@ -117,7 +196,6 @@
 
         <div class="feature">
           <div class="icon">
-            <!-- Clock -->
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 11h5v-2h-4V6h-2v7z"/></svg>
           </div>
           <h4>Réactivité</h4>
@@ -137,26 +215,17 @@
         <div class="contact-card">
           <div class="contact-item">
             <span class="contact-icon">✉️</span>
-            <div>
-              <div class="label">E-mail</div>
-              <a href="mailto:contact@mtna-logistic.com">contact@mtna-logistic.com</a>
-            </div>
+            <div><div class="label">E-mail</div>
+              <a href="mailto:contact@mtna-logistic.com">contact@mtna-logistic.com</a></div>
           </div>
-
           <div class="contact-item">
             <span class="contact-icon">📞</span>
-            <div>
-              <div class="label">Téléphone</div>
-              <a href="tel:+33695427842">06 95 42 78 42</a>
-            </div>
+            <div><div class="label">Téléphone</div>
+              <a href="tel:+33695427842">06 95 42 78 42</a></div>
           </div>
-
           <div class="contact-item">
             <span class="contact-icon">📍</span>
-            <div>
-              <div class="label">Zone</div>
-              France & Europe
-            </div>
+            <div><div class="label">Zone</div>France & Europe</div>
           </div>
         </div>
 
@@ -171,21 +240,16 @@
               <input id="email" name="email" type="email" required />
             </div>
           </div>
-
           <div class="field">
             <label for="phone">Téléphone</label>
             <input id="phone" name="phone" type="tel" />
           </div>
-
           <div class="field">
             <label for="message">Votre message *</label>
             <textarea id="message" name="message" rows="5" maxlength="1000" required></textarea>
           </div>
-
           <button class="btn btn-primary" type="submit">Envoyer la demande</button>
           <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
-
-          <!-- Fallback si JS indisponible -->
           <noscript>
             <p style="margin-top:.75rem">
               JavaScript est désactivé. Vous pouvez écrire directement à
@@ -204,8 +268,85 @@
     </div>
   </footer>
 
-  <!-- EmailJS SDK (pour l'envoi des mails) -->
+  <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script src="app.js"></script>
+  <script>
+    // Année dynamique
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menu mobile
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+    if (burger && menu) {
+      burger.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+
+    // Scroll smooth
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); menu?.classList.remove('open'); }
+      });
+    });
+
+    /* ====== EmailJS (envoi vers contact@mtna-logistic.com) ======
+       1) Crée un compte sur emailjs.com
+       2) Récupère PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID
+       3) Remplace ci-dessous.
+    */
+    const EMAILJS_PUBLIC_KEY = "REMPLACE_TON_PUBLIC_KEY";
+    const EMAILJS_SERVICE_ID = "REMPLACE_TON_SERVICE_ID";
+    const EMAILJS_TEMPLATE_ID = "REMPLACE_TON_TEMPLATE_ID";
+
+    if (typeof emailjs !== 'undefined') {
+      try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch(e) {}
+    }
+
+    const form = document.getElementById('quoteForm');
+    const statusEl = document.getElementById('formStatus');
+    const setStatus = (msg, ok=false) => {
+      statusEl.textContent = msg;
+      statusEl.style.color = ok ? '#19c3d8' : '#9bb0bd';
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        name:  form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        message: form.message.value.trim()
+      };
+      if (!data.name || !data.email || !data.message) {
+        setStatus("Merci de remplir les champs requis."); return;
+      }
+      setStatus("Envoi en cours…");
+
+      if (!EMAILJS_PUBLIC_KEY || EMAILJS_PUBLIC_KEY.startsWith("REMPLACE")) {
+        window.location.href =
+          `mailto:contact@mtna-logistic.com?subject=Demande de devis`+
+          `&body=Nom: ${encodeURIComponent(data.name)}%0AEmail: ${encodeURIComponent(data.email)}%0ATéléphone: ${encodeURIComponent(data.phone)}%0A%0A${encodeURIComponent(data.message)}`;
+        setStatus("Votre logiciel mail s'ouvre. Si rien ne se passe, écrivez à contact@mtna-logistic.com");
+        return;
+      }
+
+      try {
+        const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, data);
+        if (res.status === 200) {
+          setStatus("Message envoyé ✅ — nous revenons vers vous rapidement.", true);
+          form.reset();
+        } else {
+          setStatus("Impossible d'envoyer maintenant. Réessayez ou écrivez à contact@mtna-logistic.com");
+        }
+      } catch (err) {
+        console.error(err);
+        setStatus("Erreur d’envoi. Utilisez l’adresse contact@mtna-logistic.com");
+      }
+    });
+  </script>
 </body>
 </html>
