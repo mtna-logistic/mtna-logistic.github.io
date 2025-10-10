@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MTNA Logistic – Convoyage automobile professionnel</title>
+  <meta name="description" content="Convoyage automobile professionnel en France et en Europe. Devis rapide, service fiable et discret." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header class="header">
+    <div class="container nav">
+      <a href="#accueil" class="brand">MTNA<span>Logistic</span></a>
+
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="menu" id="menu">
+        <a href="#accueil">Accueil</a>
+        <a href="#services">Services</a>
+        <a href="#apropos">À propos</a>
+        <a href="#contact" class="btn btn-outline">Demander un devis</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="accueil" class="hero">
+    <div class="hero__backdrop"></div>
+    <div class="container hero__content">
+      <h1>Convoyage Automobile <span class="accent">Professionnel</span></h1>
+      <p class="subtitle">
+        Votre partenaire de confiance pour le transport sécurisé de vos véhicules en France et en Europe.
+      </p>
+      <a href="#contact" class="btn btn-primary">Devis gratuit</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title">Nos services</h2>
+      <p class="section-subtitle">Des solutions adaptées à vos besoins</p>
+
+      <div class="cards">
+        <!-- Carte 1 -->
+        <article class="card">
+          <!-- L'image sera ajoutée plus tard : bloc réservé -->
+          <div class="card__media placeholder">
+            <!-- vide pour le moment -->
+          </div>
+          <div class="card__body">
+            <h3>Convoyage France</h3>
+            <p>
+              Service de convoyage professionnel sur tout le territoire français.
+              Prise en charge complète, suivi et remise en main propre.
+            </p>
+            <div class="pill">350€ / jour + frais réels facturés</div>
+          </div>
+        </article>
+
+        <!-- Carte 2 -->
+        <article class="card">
+          <div class="card__media placeholder">
+            <!-- vide pour le moment -->
+          </div>
+          <div class="card__body">
+            <h3>Convoyage International</h3>
+            <p>
+              Transport de véhicules à travers l’Europe. Gestion des formalités,
+              discrétion et sécurité assurées.
+            </p>
+            <div class="pill">500€ / jour + frais réels facturés</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pourquoi nous choisir -->
+  <section id="apropos" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Pourquoi nous choisir</h2>
+      <p class="section-subtitle">L’essentiel, sans compromis.</p>
+
+      <div class="features">
+        <div class="feature">
+          <div class="icon">
+            <!-- Shield icon -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3v6c0 5.55-3.84 10.74-7 12-3.16-1.26-7-6.45-7-12V5l7-3zm0 4.18L7 7.35v3.65c0 4.13 2.8 8.33 5 9.72 2.2-1.39 5-5.59 5-9.72V7.35l-5-1.17zm0 2.82a3 3 0 110 6 3 3 0 010-6z"/></svg>
+          </div>
+          <h4>Fiabilité</h4>
+          <p>Expérience, rigueur et procédures claires pour des transports sans surprise.</p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">
+            <!-- Eye-off icon -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c.73 1.88 1.95 3.54 3.46 4.85l-1.9 1.9 1.41 1.41 18-18-1.41-1.41-3.43 3.43C15.29 4.92 13.67 4.5 12 4.5zm0 3c1.03 0 2 .26 2.85.71l-1.53 1.53A3.5 3.5 0 008.26 12L6.7 13.56A5.5 5.5 0 0112 7.5zm0 9a5.48 5.48 0 01-3.27-1.08l-1.53 1.53A7.5 7.5 0 0012 16.5c5 0 9.27-3.11 11-7.5-.53-1.36-1.32-2.6-2.32-3.67l-2.06 2.06c.26.68.38 1.41.38 2.11a5.5 5.5 0 01-5.5 5.5z"/></svg>
+          </div>
+          <h4>Discrétion</h4>
+          <p>Convoyages confidentiels, communication maîtrisée, remise discrète.</p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">
+            <!-- Shield-check -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l8 3v6c0 6-4.17 11.6-8 13-3.83-1.4-8-7-8-13v-6l8-3zm-1 12.59l-2.29-2.3-1.42 1.42L11 16.91l5.71-5.71-1.42-1.42L11 14.09z"/></svg>
+          </div>
+          <h4>Assurance & RC Pro</h4>
+          <p>Couverture adaptée à la valeur de vos véhicules + RC pro.</p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">
+            <!-- Clock -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 11h5v-2h-4V6h-2v7z"/></svg>
+          </div>
+          <h4>Réactivité</h4>
+          <p>Devis rapide, départs courts délais, suivi simple et transparent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">Un besoin ? On vous répond rapidement.</p>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <div>
+              <div class="label">E-mail</div>
+              <a href="mailto:contact@mtna-logistic.com">contact@mtna-logistic.com</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div>
+              <div class="label">Téléphone</div>
+              <a href="tel:+33695427842">06 95 42 78 42</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <div class="label">Zone</div>
+              France & Europe
+            </div>
+          </div>
+        </div>
+
+        <form id="quoteForm" class="form" autocomplete="on">
+          <div class="two-col">
+            <div class="field">
+              <label for="name">Nom complet *</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+            <div class="field">
+              <label for="email">E-mail *</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Téléphone</label>
+            <input id="phone" name="phone" type="tel" />
+          </div>
+
+          <div class="field">
+            <label for="message">Votre message *</label>
+            <textarea id="message" name="message" rows="5" maxlength="1000" required></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Envoyer la demande</button>
+          <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+
+          <!-- Fallback si JS indisponible -->
+          <noscript>
+            <p style="margin-top:.75rem">
+              JavaScript est désactivé. Vous pouvez écrire directement à
+              <a href="mailto:contact@mtna-logistic.com?subject=Demande%20de%20devis">contact@mtna-logistic.com</a>.
+            </p>
+          </noscript>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> MTNA Logistic — Tous droits réservés</span>
+      <a href="#accueil" class="backtop">↑ Haut de page</a>
+    </div>
+  </footer>
+
+  <!-- EmailJS SDK (pour l'envoi des mails) -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
