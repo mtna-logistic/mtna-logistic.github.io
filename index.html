@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MTNA Logistic – Convoyage automobile professionnel</title>
   <meta name="description" content="Convoyage automobile professionnel en France et en Europe. Devis rapide, service fiable et discret." />
+  <meta name="theme-color" content="#0e1418">
+  <meta name="mobile-web-app-capable" content="yes">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="/assets/img/services/france-map.webp">
-<link rel="preload" as="image" href="/assets/img/services/world-map.webp">
 
+  <!-- Perf: pré-chargement des visuels services -->
+  <link rel="preload" as="image" href="/assets/img/services/france-map.webp">
+  <link rel="preload" as="image" href="/assets/img/services/world-map.webp">
 
   <style>
   :root{
@@ -21,7 +25,11 @@
   *{ box-sizing:border-box }
   html,body{ margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; color:var(--text); background:var(--bg) }
   img{ max-width:100%; display:block }
-  .container{ width:min(1120px, 92%); margin-inline:auto }
+  .container{ width:min(1040px, 94%); margin-inline:auto }
+
+  /* Accessibilité / confort */
+  :focus-visible{ outline:3px solid var(--accent); outline-offset:3px }
+  a, button{ -webkit-tap-highlight-color: rgba(255,255,255,.08) }
 
   /* Header / Nav */
   .header{ position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
@@ -40,41 +48,35 @@
   .burger{ display:none; background:none; border:0; padding:.25rem; cursor:pointer }
   .burger span{ display:block; width:24px; height:2px; background:#cfe7ef; margin:5px 0; transition:.2s }
 
+  /* Sections */
+  .section{ padding:clamp(3.25rem, 6vw, 6rem) 0; content-visibility:auto; contain-intrinsic-size: 1px 800px }
+  .section-alt{ background:var(--bg-alt) }
+  .section-title{ font-size:clamp(1.7rem, 1.6vw + 1.1rem, 2.3rem); margin:0 0 .5rem; line-height:1.2 }
+  .section-subtitle{ color:var(--muted); margin:0 0 2rem; line-height:1.6 }
+
   /* Hero plein écran */
   .hero{ position:relative; min-height:100svh; display:grid; place-items:center; text-align:center }
   .hero__backdrop{ position:absolute; inset:0;
     background:
-      radial-gradient(1200px 600px at 50% 8%, rgba(25,195,216,.25), transparent 60%),
+      radial-gradient(1200px 600px at 50% 8%, rgba(25,195,216,.22), transparent 60%),
       linear-gradient(to bottom, rgba(3,8,12,.35), rgba(3,8,12,.92)),
       url('https://images.unsplash.com/photo-1549921296-3a6b3a5f5b37?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
     filter:saturate(95%); }
-  .hero__content{ position:relative; z-index:1; padding:7rem 0 5rem }
-  .hero h1{ font-size:clamp(2rem, 4vw + 1.4rem, 4rem); margin:0 0 1rem; line-height:1.05 }
+  .hero__content{ position:relative; z-index:1; padding:6.5rem 0 4.25rem }
+  .hero h1{ font-size:clamp(2rem, 4vw + 1.4rem, 3.6rem); margin:0 0 1rem; line-height:1.08 }
   .hero .accent{ color:var(--accent) }
-  .subtitle{ color:var(--muted); font-size:clamp(.95rem, 1vw + .6rem, 1.2rem); margin-bottom:1.6rem }
-
-  /* Sections */
-  .section{ padding:4.5rem 0 }
-  .section-alt{ background:var(--bg-alt) }
-  .section-title{ font-size:clamp(1.6rem, 1.6vw + 1rem, 2.2rem); margin:0 0 .4rem }
-  .section-subtitle{ color:var(--muted); margin:0 0 2rem }
+  .subtitle{ color:var(--muted); font-size:clamp(1rem, 1vw + .7rem, 1.25rem); margin-bottom:1.75rem; line-height:1.7 }
 
   /* Services */
   .cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem }
-  .card{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; overflow:hidden; box-shadow:var(--shadow) }
-  .card__media{ height:220px; background:#0a1116; position:relative }
-  .card__body{ padding:1.1rem 1.2rem 1.4rem }
-  .card h3{ margin:.2rem 0 .3rem; font-size:1.25rem }
-  .card p{ color:var(--muted); margin:0 0 .9rem }
-  .pill{ display:inline-block; background:rgba(25,195,216,.12); color:var(--accent); border:1px solid var(--ring); padding:.55rem .75rem; border-radius:.7rem; font-weight:700 }
-
-  /* Media overlays */
-  .media-layer{
-    position:absolute; inset:0; background-position:center; background-repeat:no-repeat;
-  }
-  .media--car{ background-size:contain }
-  .media--map{ background-size:cover; filter:contrast(1.05) saturate(0.9) opacity(.35) }
-
+  .card{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:20px; overflow:hidden; box-shadow:var(--shadow) }
+  .card__media{ height:260px; background:#0a1116; position:relative }
+  .media-layer{ position:absolute; inset:0; background-position:center; background-repeat:no-repeat }
+  .media--map{ background-size:cover; filter:contrast(1.05) saturate(0.9) opacity(.38) }
+  .card__body{ padding:1.25rem 1.25rem 1.5rem }
+  .card h3{ margin:.25rem 0 .4rem; font-size:1.3rem; letter-spacing:.2px }
+  .card p{ color:var(--muted); margin:0 0 1rem; line-height:1.65 }
+  .pill{ display:inline-block; background:rgba(25,195,216,.12); color:var(--accent); border:1px solid var(--ring); padding:.6rem .8rem; border-radius:.8rem; font-weight:700 }
 
   /* Features */
   .features{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem }
@@ -93,7 +95,6 @@
   .contact-row .value{ font-weight:700; letter-spacing:.2px }
   .contact-row .hint{ color:var(--muted); font-size:.9rem }
   .copy{ margin-left:auto }
-
   .form{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:1.25rem; box-shadow:var(--shadow) }
   .field{ display:flex; flex-direction:column; gap:.35rem; margin-bottom:.8rem }
   input, textarea{ width:100%; background:#0b1217; border:1px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; padding:.8rem .9rem; outline:none }
@@ -107,15 +108,39 @@
   .backtop{ color:var(--muted); text-decoration:none }
   .backtop:hover{ color:var(--text) }
 
-  /* Responsive */
+  /* TABLETTE */
+  @media (max-width: 1024px){
+    .hero__content{ padding:5.5rem 0 3.75rem }
+    .card__media{ height:280px }
+  }
+
+  /* MOBILE LARGE */
   @media (max-width: 900px){
-    .cards{ grid-template-columns:1fr }
-    .features{ grid-template-columns:1fr 1fr }
-    .contact-grid{ grid-template-columns:1fr }
+    html{ scroll-padding-top:72px } /* évite que les ancres passent sous le header */
+    .cards{ grid-template-columns:1fr; gap:1.1rem }
+    .features{ grid-template-columns:1fr 1fr; gap:.9rem }
+    .contact-grid{ grid-template-columns:1fr; gap:1rem }
     .two-col{ grid-template-columns:1fr }
     .burger{ display:inline-block }
-    .menu{ position:absolute; top:62px; right:16px; left:16px; flex-direction:column; background:#0a1116; border:1px solid rgba(255,255,255,.08); padding:.6rem; border-radius:12px; display:none }
+    .menu{
+      position:fixed; top:64px; right:16px; left:16px;
+      flex-direction:column; background:#0a1116; border:1px solid rgba(255,255,255,.12);
+      padding:.6rem; border-radius:14px; display:none; box-shadow:var(--shadow)
+    }
+    .menu a{ padding:.9rem 1rem } /* tap-targets plus grands */
     .menu.open{ display:flex }
+  }
+
+  /* MOBILE COMPACT */
+  @media (max-width: 520px){
+    .section{ padding:3rem 0 }
+    .hero__content{ padding:4.5rem 0 3rem }
+    .hero h1{ font-size:clamp(1.85rem, 6.5vw, 2.4rem) }
+    .subtitle{ font-size:1rem }
+    .card__media{ height:240px }
+    .card__body{ padding:1.1rem 1.05rem 1.25rem }
+    .feature{ padding:1rem }
+    .contact-row{ padding:.8rem }
   }
   </style>
 </head>
@@ -158,10 +183,8 @@
         <article class="card">
           <div class="card__media" role="img" aria-label="Carte de France stylisée en fond">
             <div class="media-layer media--map"
-                style="background-image:url('/assets/img/services/france-map.webp');"></div>
-            </div>
-
-
+                 style="background-image:url('/assets/img/services/france-map.webp');"></div>
+          </div>
           <div class="card__body">
             <h3>Convoyage France</h3>
             <p>Service de convoyage professionnel sur tout le territoire français. Prise en charge complète, suivi et remise en main propre.</p>
@@ -171,11 +194,9 @@
 
         <article class="card">
           <div class="card__media" role="img" aria-label="Carte du monde stylisée en fond">
-  <div class="media-layer media--map"
-       style="background-image:url('/assets/img/services/world-map.webp');"></div>
-</div>
-
-
+            <div class="media-layer media--map"
+                 style="background-image:url('/assets/img/services/world-map.webp');"></div>
+          </div>
           <div class="card__body">
             <h3>Convoyage International</h3>
             <p>Transport de véhicules à travers l’Europe. Gestion des formalités et sécurité assurées.</p>
@@ -200,8 +221,6 @@
           <h4>Fiabilité</h4>
           <p>Expérience, rigueur et procédures claires pour des transports sans surprise.</p>
         </div>
-
-        
 
         <div class="feature">
           <div class="icon">
@@ -235,10 +254,10 @@
             <div class="contact-row">
               <div class="icon" aria-hidden="true">✉️</div>
               <div>
-                <div class="hint">E‑mail</div>
+                <div class="hint">E-mail</div>
                 <div class="value" id="emailValue">contact@mtna-logistic.com</div>
               </div>
-              <button class="btn btn-outline copy" data-copy="#emailValue" aria-label="Copier l'adresse e‑mail">Copier</button>
+              <button class="btn btn-outline copy" data-copy="#emailValue" aria-label="Copier l'adresse e-mail">Copier</button>
             </div>
             <div class="contact-row">
               <div class="icon" aria-hidden="true">📞</div>
@@ -265,7 +284,7 @@
               <input id="name" name="name" type="text" required />
             </div>
             <div class="field">
-              <label for="email">E‑mail *</label>
+              <label for="email">E-mail *</label>
               <input id="email" name="email" type="email" required />
             </div>
           </div>
@@ -313,7 +332,7 @@
       });
     }
 
-    // Scroll smooth
+    // Scroll smooth + fermeture menu
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const id = a.getAttribute('href').slice(1);
