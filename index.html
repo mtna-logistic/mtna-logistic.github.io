@@ -29,7 +29,7 @@
   .menu{ display:flex; align-items:center; gap:1rem }
   .menu a{ color:var(--text); text-decoration:none; padding:.55rem .9rem; border-radius:999px; opacity:.9 }
   .menu a:hover{ opacity:1; background:rgba(255,255,255,.04) }
-  .btn{ display:inline-flex; align-items:center; justify-content:center; padding:.85rem 1.1rem; border-radius:.9rem; font-weight:700; text-decoration:none; transition:.2s ease; border:1px solid transparent }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; padding:.85rem 1.1rem; border-radius:.9rem; font-weight:700; text-decoration:none; transition:.2s ease; border:1px solid transparent; cursor:pointer }
   .btn-primary{ background:var(--accent); color:#042028; box-shadow:0 8px 20px var(--ring) }
   .btn-primary:hover{ transform:translateY(-1px); background:var(--accent-2) }
   .btn-outline{ border-color:rgba(255,255,255,.14) }
@@ -37,15 +37,15 @@
   .burger{ display:none; background:none; border:0; padding:.25rem; cursor:pointer }
   .burger span{ display:block; width:24px; height:2px; background:#cfe7ef; margin:5px 0; transition:.2s }
 
-  /* Hero */
-  .hero{ position:relative; min-height:72vh; display:grid; place-items:center; text-align:center }
+  /* Hero plein écran */
+  .hero{ position:relative; min-height:100svh; display:grid; place-items:center; text-align:center }
   .hero__backdrop{ position:absolute; inset:0;
     background:
-      radial-gradient(1200px 600px at 50% 10%, rgba(25,195,216,.25), transparent 60%),
-      linear-gradient(to bottom, rgba(3,8,12,.55), rgba(3,8,12,.92)),
-      url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1960&auto=format&fit=crop') center/cover no-repeat;
+      radial-gradient(1200px 600px at 50% 8%, rgba(25,195,216,.25), transparent 60%),
+      linear-gradient(to bottom, rgba(3,8,12,.35), rgba(3,8,12,.92)),
+      url('https://images.unsplash.com/photo-1549921296-3a6b3a5f5b37?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
     filter:saturate(95%); }
-  .hero__content{ position:relative; z-index:1; padding:5rem 0 }
+  .hero__content{ position:relative; z-index:1; padding:7rem 0 5rem }
   .hero h1{ font-size:clamp(2rem, 4vw + 1.4rem, 4rem); margin:0 0 1rem; line-height:1.05 }
   .hero .accent{ color:var(--accent) }
   .subtitle{ color:var(--muted); font-size:clamp(.95rem, 1vw + .6rem, 1.2rem); margin-bottom:1.6rem }
@@ -59,12 +59,18 @@
   /* Services */
   .cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem }
   .card{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; overflow:hidden; box-shadow:var(--shadow) }
-  .card__media{ height:190px; background:#0a1116 }
-  .placeholder{ background:linear-gradient(145deg,#0d1620,#0a1218) }
+  .card__media{ height:220px; background:#0a1116; position:relative }
   .card__body{ padding:1.1rem 1.2rem 1.4rem }
   .card h3{ margin:.2rem 0 .3rem; font-size:1.25rem }
   .card p{ color:var(--muted); margin:0 0 .9rem }
   .pill{ display:inline-block; background:rgba(25,195,216,.12); color:var(--accent); border:1px solid var(--ring); padding:.55rem .75rem; border-radius:.7rem; font-weight:700 }
+
+  /* Media overlays */
+  .media-layer{
+    position:absolute; inset:0; background-position:center; background-repeat:no-repeat;
+  }
+  .media--car{ background-size:contain }
+  .media--map{ background-size:cover; filter:contrast(1.1) saturate(0.8) opacity(.25) }
 
   /* Features */
   .features{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem }
@@ -77,10 +83,13 @@
   /* Contact */
   .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.25rem }
   .contact-card{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:1.25rem; box-shadow:var(--shadow) }
-  .contact-item{ display:flex; gap:.8rem; align-items:flex-start; padding:.6rem 0; border-bottom:1px solid rgba(255,255,255,.06) }
-  .contact-item:last-child{ border-bottom:0 }
-  .contact-icon{ width:36px; height:36px; display:grid; place-items:center; background:rgba(25,195,216,.12); border:1px solid var(--ring); border-radius:10px }
-  .label{ color:var(--muted); font-size:.9rem }
+  .contact-rows{ display:grid; gap:.9rem }
+  .contact-row{ display:flex; align-items:center; gap:.9rem; background:#0b1217; border:1px solid rgba(255,255,255,.08); padding:.85rem; border-radius:12px }
+  .contact-row .icon{ width:36px; height:36px; display:grid; place-items:center; background:rgba(25,195,216,.12); border:1px solid var(--ring); border-radius:10px; flex:0 0 36px }
+  .contact-row .value{ font-weight:700; letter-spacing:.2px }
+  .contact-row .hint{ color:var(--muted); font-size:.9rem }
+  .copy{ margin-left:auto }
+
   .form{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:1.25rem; box-shadow:var(--shadow) }
   .field{ display:flex; flex-direction:column; gap:.35rem; margin-bottom:.8rem }
   input, textarea{ width:100%; background:#0b1217; border:1px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; padding:.8rem .9rem; outline:none }
@@ -110,7 +119,7 @@
   <!-- Header / Navbar -->
   <header class="header">
     <div class="container nav">
-      <a href="#accueil" class="brand">MTNA<span>Logistic</span></a>
+      <a href="#accueil" class="brand" aria-label="Aller à l'accueil">MTNA<span>Logistic</span></a>
 
       <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -125,9 +134,9 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section id="accueil" class="hero">
-    <div class="hero__backdrop"></div>
+  <!-- Hero plein écran -->
+  <section id="accueil" class="hero" aria-label="Section d'accueil">
+    <div class="hero__backdrop" aria-hidden="true"></div>
     <div class="container hero__content">
       <h1>Convoyage Automobile <span class="accent">Professionnel</span></h1>
       <p class="subtitle">Votre partenaire de confiance pour le transport sécurisé de vos véhicules en France et en Europe.</p>
@@ -143,7 +152,10 @@
 
       <div class="cards">
         <article class="card">
-          <div class="card__media placeholder"></div>
+          <div class="card__media" role="img" aria-label="Voiture avec carte de France en arrière-plan">
+            <div class="media-layer media--map" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Blank_map_of_France.svg/1024px-Blank_map_of_France.svg.png');"></div>
+            <div class="media-layer media--car" style="background-image:url('https://images.unsplash.com/photo-1536840362362-86724657e4c1?q=80&w=1600&auto=format&fit=crop');"></div>
+          </div>
           <div class="card__body">
             <h3>Convoyage France</h3>
             <p>Service de convoyage professionnel sur tout le territoire français. Prise en charge complète, suivi et remise en main propre.</p>
@@ -152,7 +164,10 @@
         </article>
 
         <article class="card">
-          <div class="card__media placeholder"></div>
+          <div class="card__media" role="img" aria-label="Voiture avec carte du monde en arrière-plan">
+            <div class="media-layer media--map" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1280px-World_map_-_low_resolution.svg.png');"></div>
+            <div class="media-layer media--car" style="background-image:url('https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?q=80&w=1600&auto=format&fit=crop');"></div>
+          </div>
           <div class="card__body">
             <h3>Convoyage International</h3>
             <p>Transport de véhicules à travers l’Europe. Gestion des formalités, discrétion et sécurité assurées.</p>
@@ -206,26 +221,38 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section">
+  <section id="contact" class="section" aria-label="Contact">
     <div class="container">
       <h2 class="section-title">Contact</h2>
       <p class="section-subtitle">Un besoin ? On vous répond rapidement.</p>
 
       <div class="contact-grid">
-        <div class="contact-card">
-          <div class="contact-item">
-            <span class="contact-icon">✉️</span>
-            <div><div class="label">E-mail</div>
-              <a href="mailto:contact@mtna-logistic.com">contact@mtna-logistic.com</a></div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">📞</span>
-            <div><div class="label">Téléphone</div>
-              <a href="tel:+33695427842">06 95 42 78 42</a></div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">📍</span>
-            <div><div class="label">Zone</div>France & Europe</div>
+        <div class="contact-card" aria-labelledby="coord-title">
+          <h3 id="coord-title" style="margin:0 0 .6rem">Coordonnées</h3>
+          <div class="contact-rows">
+            <div class="contact-row">
+              <div class="icon" aria-hidden="true">✉️</div>
+              <div>
+                <div class="hint">E‑mail</div>
+                <div class="value" id="emailValue">contact@mtna-logistic.com</div>
+              </div>
+              <button class="btn btn-outline copy" data-copy="#emailValue" aria-label="Copier l'adresse e‑mail">Copier</button>
+            </div>
+            <div class="contact-row">
+              <div class="icon" aria-hidden="true">📞</div>
+              <div>
+                <div class="hint">Téléphone</div>
+                <div class="value" id="phoneValue">06 95 42 78 42</div>
+              </div>
+              <button class="btn btn-outline copy" data-copy="#phoneValue" aria-label="Copier le numéro de téléphone">Copier</button>
+            </div>
+            <div class="contact-row">
+              <div class="icon" aria-hidden="true">📍</div>
+              <div>
+                <div class="hint">Zone</div>
+                <div class="value">France & Europe</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -236,7 +263,7 @@
               <input id="name" name="name" type="text" required />
             </div>
             <div class="field">
-              <label for="email">E-mail *</label>
+              <label for="email">E‑mail *</label>
               <input id="email" name="email" type="email" required />
             </div>
           </div>
@@ -290,6 +317,23 @@
         const id = a.getAttribute('href').slice(1);
         const el = document.getElementById(id);
         if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); menu?.classList.remove('open'); }
+      });
+    });
+
+    // Boutons "Copier"
+    document.querySelectorAll('.copy').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const sel = btn.getAttribute('data-copy');
+        const el = document.querySelector(sel);
+        if (!el) return;
+        try {
+          await navigator.clipboard.writeText(el.textContent.trim());
+          const old = btn.textContent;
+          btn.textContent = 'Copié !';
+          setTimeout(() => (btn.textContent = old), 1200);
+        } catch (e) {
+          alert('Impossible de copier automatiquement.');
+        }
       });
     });
 
