@@ -7,6 +7,9 @@
   <meta name="description" content="Convoyage automobile professionnel en France et en Europe. Devis rapide, service fiable et discret." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/assets/img/services/france-map.webp">
+<link rel="preload" as="image" href="/assets/img/services/world-map.webp">
+
 
   <style>
   :root{
@@ -70,7 +73,8 @@
     position:absolute; inset:0; background-position:center; background-repeat:no-repeat;
   }
   .media--car{ background-size:contain }
-  .media--map{ background-size:cover; filter:contrast(1.1) saturate(0.8) opacity(.25) }
+  .media--map{ background-size:cover; filter:contrast(1.05) saturate(0.9) opacity(.35) }
+
 
   /* Features */
   .features{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem }
@@ -152,10 +156,12 @@
 
       <div class="cards">
         <article class="card">
-          <div class="card__media" role="img" aria-label="Voiture avec carte de France en arrière-plan">
-            <div class="media-layer media--map" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Blank_map_of_France.svg/1024px-Blank_map_of_France.svg.png');"></div>
-            <div class="media-layer media--car" style="background-image:url('https://images.unsplash.com/photo-1536840362362-86724657e4c1?q=80&w=1600&auto=format&fit=crop');"></div>
-          </div>
+          <div class="card__media" role="img" aria-label="Carte de France stylisée en fond">
+            <div class="media-layer media--map"
+                style="background-image:url('/assets/img/services/france-map.webp');"></div>
+            </div>
+
+
           <div class="card__body">
             <h3>Convoyage France</h3>
             <p>Service de convoyage professionnel sur tout le territoire français. Prise en charge complète, suivi et remise en main propre.</p>
@@ -164,10 +170,12 @@
         </article>
 
         <article class="card">
-          <div class="card__media" role="img" aria-label="Voiture avec carte du monde en arrière-plan">
-            <div class="media-layer media--map" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1280px-World_map_-_low_resolution.svg.png');"></div>
-            <div class="media-layer media--car" style="background-image:url('https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?q=80&w=1600&auto=format&fit=crop');"></div>
-          </div>
+          <div class="card__media" role="img" aria-label="Carte du monde stylisée en fond">
+  <div class="media-layer media--map"
+       style="background-image:url('/assets/img/services/world-map.webp');"></div>
+</div>
+
+
           <div class="card__body">
             <h3>Convoyage International</h3>
             <p>Transport de véhicules à travers l’Europe. Gestion des formalités, discrétion et sécurité assurées.</p>
