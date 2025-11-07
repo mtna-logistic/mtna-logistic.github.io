@@ -190,7 +190,8 @@
     <div class="container tiny">© <span id="year"></span> MTNA Logistic.</div>
   </footer>
 
-  <!-- Cookies très simple -->
+  
+  <!-- Cookies : bannière -->
   <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
     <div class="cookie-inner">
       <p>Cookies nécessaires + mesure d’audience anonyme (option).</p>
@@ -201,23 +202,48 @@
     </div>
   </div>
 
+  <!-- Cookie modal (RGPD-friendly) -->
   <div class="cookie-modal" role="dialog" aria-modal="true" aria-label="Préférences cookies" hidden>
     <div class="cookie-card">
       <h3>Préférences cookies</h3>
-      <label class="switch"><input type="checkbox" checked disabled><span>Nécessaires</span></label>
-      <label class="switch"><input type="checkbox" id="cookie-analytics"><span>Mesure d’audience (anonyme)</span></label>
+
+      <label class="switch">
+        <input type="checkbox" checked disabled>
+        <span>Nécessaires (toujours actifs)</span>
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="cookie-analytics">
+        <span>Mesure d’audience (anonyme)</span>
+      </label>
+
+      <details class="cookie-terms">
+        <summary>Contrat des cookies (cliquez pour lire)</summary>
+        <div class="terms-body">
+          <p>Nous utilisons uniquement :</p>
+          <ul>
+            <li><strong>Nécessaires</strong> — fonctionnement du site (consentement, anti-abus). Aucun suivi publicitaire.</li>
+            <li><strong>Mesure d’audience (anonyme)</strong> — stats agrégées (pages vues, appareils, zones approximatives). Pas d’ID pub, pas de profilage, pas de reciblage.</li>
+          </ul>
+          <p><strong>Vos droits :</strong> modifier votre choix à tout moment, lire ce qui est stocké, ou retirer votre consentement.</p>
+        </div>
+      </details>
+
       <div class="cta-row left">
-        <button class="btn btn-small" data-cookie-save>Enregistrer</button>
-        <button class="btn ghost btn-small" data-cookie-close>Fermer</button>
+        <button type="button" class="btn btn-small" data-cookie-save>Enregistrer</button>
+        <button type="button" class="btn ghost btn-small" data-cookie-close>Fermer</button>
+        <button type="button" class="btn ghost btn-small" data-cookie-refuse>Tout refuser</button>
+        <button type="button" class="btn ghost btn-small" data-cookie-reset>Retirer mon consentement</button>
       </div>
+
       <button class="link-like tiny" data-open-cookie-read>Lire les cookies</button>
     </div>
   </div>
 
+  <!-- Lecteur lisible -->
   <div class="cookie-read" role="dialog" aria-label="Lecture cookies" hidden>
     <div class="cookie-card">
       <h3>Cookies stockés</h3>
-      <pre id="cookie-dump" class="cookie-dump"></pre>
+      <div id="cookie-readable"></div>
       <div class="cta-row left">
         <button class="btn ghost btn-small" data-close-cookie-read>Fermer</button>
       </div>

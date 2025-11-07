@@ -45,39 +45,94 @@ RGPD: j’accepte d'être recontacté pour ce devis.
   });
 }
 
-// Cookies (très simple)
+/* ====================== Cookies ====================== */
 const COOKIE_NAME = 'mtna_cookie_prefs';
 const banner = $('.cookie-banner');
-const modal = $('.cookie-modal');
+const modal  = $('.cookie-modal');
 const reader = $('.cookie-read');
-const dump = $('#cookie-dump');
+const readableBox = $('#cookie-readable');
+const analyticsCb = $('#cookie-analytics');
 
-const open = el => el?.removeAttribute('hidden');
+const open  = el => el?.removeAttribute('hidden');
 const close = el => el?.setAttribute('hidden','');
 
-const getPrefs = () => {
+function parseCookie(){
   const raw = document.cookie.split('; ').find(x => x.startsWith(COOKIE_NAME+'='));
   if(!raw) return null;
   try{ return JSON.parse(decodeURIComponent(raw.split('=')[1])); }catch{ return null; }
-};
-const setPrefs = (prefs) => {
+}
+function setCookie(prefs){
   const val = encodeURIComponent(JSON.stringify(prefs));
   const exp = new Date(); exp.setFullYear(exp.getFullYear()+1);
   document.cookie = `${COOKIE_NAME}=${val}; Expires=${exp.toUTCString()}; Path=/; SameSite=Lax`;
-};
+}
+function deleteCookie(){
+  document.cookie = `${COOKIE_NAME}=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/; SameSite=Lax`;
+}
+function prefsToHtml(p){
+  if(!p) return `<p>(aucun consentement enregistré)</p>`;
+  const dt = new Date(p.ts || Date.now()).toLocaleString();
+  return `
+    <ul>
+      <li><strong>Nécessaires :</strong> ${p.necessary ? 'activés' : 'désactivés'} (toujours actifs)</li>
+      <li><strong>Mesure d’audience (anonyme) :</strong> ${p.analytics ? 'activée' : 'désactivée'}</li>
+      <li><strong>Enregistré le :</strong> ${dt}</li>
+    </ul>
+    <p class="tiny muted">Ce site ne dépose aucun cookie publicitaire ni de reciblage.</p>
+  `;
+}
 
-if (!getPrefs()) open(banner);
+// Afficher la bannière si pas de préférence
+const existing = parseCookie();
+if (!existing) open(banner);
 
-$('[data-cookie-accept]')?.addEventListener('click', () => {
-  setPrefs({necessary:true, analytics:true, ts:Date.now()}); close(banner);
+// Pré-remplir la modale
+function syncModalFromPrefs(){
+  const p = parseCookie();
+  if (analyticsCb){
+    analyticsCb.checked = !!p?.analytics;
+  }
+}
+
+// Bouton footer "Cookies"
+$('[data-open-cookies]')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  syncModalFromPrefs();
+  open(modal);
 });
-$('[data-cookie-custom]')?.addEventListener('click', () => { close(banner); open(modal); });
+
+// Bannière
+$('[data-cookie-accept]')?.addEventListener('click', () => {
+  setCookie({necessary:true, analytics:true, ts:Date.now()});
+  close(banner);
+});
+$('[data-cookie-custom]')?.addEventListener('click', () => {
+  close(banner);
+  syncModalFromPrefs();
+  open(modal);
+});
+
+// Modale : actions
 $('[data-cookie-save]')?.addEventListener('click', () => {
-  const analytics = $('#cookie-analytics')?.checked || false;
-  setPrefs({necessary:true, analytics, ts:Date.now()}); close(modal);
+  const analytics = analyticsCb?.checked || false;
+  setCookie({necessary:true, analytics, ts:Date.now()});
+  close(modal);
 });
 $('[data-cookie-close]')?.addEventListener('click', () => close(modal));
+$('[data-cookie-refuse]')?.addEventListener('click', () => {
+  setCookie({necessary:true, analytics:false, ts:Date.now()});
+  close(modal);
+});
+$('[data-cookie-reset]')?.addEventListener('click', () => {
+  deleteCookie();
+  close(modal);
+  open(banner); // redemande le choix
+});
+
+// Lecture lisible
 $('[data-open-cookie-read]')?.addEventListener('click', () => {
-  dump.textContent = document.cookie || '(aucun cookie)'; open(reader);
+  const prefs = parseCookie();
+  if (readableBox) readableBox.innerHTML = prefsToHtml(prefs);
+  open(reader);
 });
 $('[data-close-cookie-read]')?.addEventListener('click', () => close(reader));
